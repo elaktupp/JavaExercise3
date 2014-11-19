@@ -20,7 +20,7 @@ public class Relaxation extends Exercise {
     public void beginExercise(Player player) {
         super.setPlayer(player);
         System.out.println(player.getName()+"#"+player.getNumber()+
-                           " is relaxing "+
+                           " is relaxing"+
                            " for "+getDurationInMinutes()+" minutes.");
         exerciseTimer(this);
     }

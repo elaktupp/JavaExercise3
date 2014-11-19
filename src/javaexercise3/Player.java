@@ -75,16 +75,23 @@ public abstract class Player implements Serializable {
     }
     
     public boolean isExercising() {
+        
+        System.out.println("PLAYER "+name+" is "+isExercising);
+        
         return isExercising;
     }
     
     public void setIsExercising(boolean exercising) {
         this.isExercising = exercising;
+        
+        System.out.println("PLAYER "+name+" SET is "+isExercising);
     }
     
     public void setExercise(Exercise exercise) {
         isExercising = true;
         exercise.beginExercise(this);
+        
+        System.out.println("PLAYER "+name+" SET is "+isExercising+" BEGIN");
     }
     
     public void setName(String name) {

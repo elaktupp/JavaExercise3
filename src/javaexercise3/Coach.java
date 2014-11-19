@@ -122,9 +122,9 @@ public class Coach extends MyObserver {
                                " exercise.");
             player.setIsExercising(false);
             if (team.isTeamReady()) {
+                // Exercising is completed
                 setupTheGame();
             }
-            
         } else {
             System.out.println("ERROR: Unexpected class");
             System.exit(1);
@@ -185,19 +185,13 @@ public class Coach extends MyObserver {
                 drills[index].setDurationInMinutes();
                 index++;
                 team.addPlayer(player);
-            } else {
-                player.rest();
-                
             }
         }
-        
-        writeRoster(file);
         
         index = 0;
         
         // Set exercise starts the exercise (timer) immediately
         for (Player player : players) {
-            // If not resting then begin exercise
             if (drills[index] != null) {
                 player.setExercise(drills[index++]);
             }
@@ -218,6 +212,10 @@ public class Coach extends MyObserver {
         team.getPlayerInPosition(Team.LEFTDEFENCE).printStatistics();
         team.getPlayerInPosition(Team.RIGHTDEFENCE).printStatistics();
         
+        // Rest all players before updating the roster
+        for (Player it : players) {
+            it.rest();
+        }
         writeRoster(file);
     }
     

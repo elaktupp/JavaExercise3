@@ -74,6 +74,9 @@ public class Team {
                 open += (positions[i]+" ");
             }
         }
+        if (open.equals("Needs ")) {
+            open = "FULL TEAM";
+        }
         return open;
     }
     
