@@ -36,14 +36,30 @@ public class Team {
         }
     }
     
-    public void addPlayerToPosition(Player player, int position) {
-        if (position >= GOALIE && position <= RIGHTDEFENCE) {
-            System.out.println("#"+player.getNumber()+" "+player.getName()+
-                               " plays as the "+positions[position]);
-            team[position] = player;
-        } else {
-            System.out.println("Incorrect position value!");
-            System.exit(1);
+    public void addPlayer(Player player) {
+        switch (player.getRole()) {
+            case "Goalie":
+                team[Team.GOALIE] = player;
+                break;
+            case "Center":
+                team[Team.CENTER] = player;
+                break;
+            case "Leftwing":
+                team[Team.LEFTWING] = player;
+                break;
+            case "Rightwing":
+                team[Team.RIGHTWING] = player;
+                break;
+            case "Defence":
+                if (team[Team.LEFTDEFENCE] == null) {
+                    team[Team.LEFTDEFENCE] = player;
+                } else {
+                    team[Team.RIGHTDEFENCE] = player;
+                }
+                break;
+            default:
+                System.out.println("ERROR: Bad role");
+                System.exit(1);
         }
     }
     
@@ -51,9 +67,28 @@ public class Team {
         return team[position];
     }
     
+    public String openPositions() {
+        String open = "Needs ";
+        for (int i = 0; i < team.length; i++) {
+            if (team[i] == null) {
+                open += (positions[i]+" ");
+            }
+        }
+        return open;
+    }
+    
     public boolean isTeamFull() {
         for (Player it : team) {
             if (it == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public boolean isTeamReady() {
+        for (Player it : team) {
+            if (it.isExercising()) {
                 return false;
             }
         }

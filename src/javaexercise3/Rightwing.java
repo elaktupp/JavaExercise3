@@ -23,8 +23,10 @@ public class Rightwing extends Player {
         System.out.println("#"+getNumber()+" "+getName()+"'s statistics: "+
                            getAccuracy()+"/"+getAgility()+"/"+
                            getEndurance()+"/"+getStrength());
-        System.out.println("Hits: "+getStatShotsHit()+", Misses: "+getStatShotsMissed());
-        System.out.println("Made:  "+getStatGoalsMade()+", Own: "+getStatGoalsOwn());
+        System.out.println("Hits: "+getStatShotsHit()+
+                           ", Misses: "+getStatShotsMissed()+
+                           ", Made:  "+getStatGoalsMade()+
+                           ", Own: "+getStatGoalsOwn());
         int good = getStatOffenceSuccess();
         int bad = getStatOffenceFailure();
         System.out.println("Offence (good - bad): "+good+

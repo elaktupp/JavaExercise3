@@ -23,11 +23,13 @@ public class Defence extends Player {
         System.out.println("#"+getNumber()+" "+getName()+"'s statistics: "+
                            getAccuracy()+"/"+getAgility()+"/"+
                            getEndurance()+"/"+getStrength());
-        System.out.println("Hits: "+getStatShotsHit()+", Misses: "+getStatShotsMissed());
-        System.out.println("Made:  "+getStatGoalsMade()+", Own: "+getStatGoalsOwn());
+        System.out.println("Hits: "+getStatShotsHit()+
+                           ", Misses: "+getStatShotsMissed()+
+                           ", Made:  "+getStatGoalsMade()+
+                           ", Own: "+getStatGoalsOwn());
         int good = getStatDefenceSuccess();
         int bad = getStatDefenceFailure();
-        System.out.println("defence (good - bad): "+good+
+        System.out.println("Defence (good - bad): "+good+
                            " - "+bad+" = "+(good-bad));
     }
 

@@ -19,6 +19,8 @@ public abstract class Player implements Serializable {
     private String name;
     private int number;
     
+    private boolean isExercising;
+    
     private int statGoalsMade;
     private int statGoalsSaved;
     private int statGoalsLet;
@@ -53,6 +55,8 @@ public abstract class Player implements Serializable {
         this.strength = new int[2];
         this.strength[0] = 50 + rand.nextInt(50);
         this.strength[1] = this.strength[0];
+        
+        this.isExercising = false;
     }
     
     public void rest() {
@@ -70,7 +74,16 @@ public abstract class Player implements Serializable {
         }
     }
     
+    public boolean isExercising() {
+        return isExercising;
+    }
+    
+    public void setIsExercising(boolean exercising) {
+        this.isExercising = exercising;
+    }
+    
     public void setExercise(Exercise exercise) {
+        isExercising = true;
         exercise.beginExercise(this);
     }
     

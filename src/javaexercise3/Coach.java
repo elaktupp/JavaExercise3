@@ -43,21 +43,41 @@ public class Coach extends MyObserver {
             aPlayer.setNumber(19);
             players.add(aPlayer);
 
+            aPlayer = new Goalie();
+            aPlayer.setName("Allan Vermeulen");
+            aPlayer.setNumber(29);
+            players.add(aPlayer);
+            
             aPlayer = new Center();
             aPlayer.setName("Richard Helm");
             aPlayer.setNumber(71);
             players.add(aPlayer);
 
+            aPlayer = new Center();
+            aPlayer.setName("Scott Ambler");
+            aPlayer.setNumber(81);
+            players.add(aPlayer);
+            
             aPlayer = new Leftwing();
             aPlayer.setName("Ralph Johnson");
             aPlayer.setNumber(8);
             players.add(aPlayer);
 
+            aPlayer = new Leftwing();
+            aPlayer.setName("Greg Bumgardner");
+            aPlayer.setNumber(18);
+            players.add(aPlayer);
+            
             aPlayer = new Rightwing();
             aPlayer.setName("John Vlissides");
             aPlayer.setNumber(26);
             players.add(aPlayer);
 
+            aPlayer = new Rightwing();
+            aPlayer.setName("Eldon Metz");
+            aPlayer.setNumber(36);
+            players.add(aPlayer);
+            
             aPlayer = new Defence();
             aPlayer.setName("Grady Booch");
             aPlayer.setNumber(20);
@@ -66,6 +86,16 @@ public class Coach extends MyObserver {
             aPlayer = new Defence();
             aPlayer.setName("Andrew Tanenbaum");
             aPlayer.setNumber(14);
+            players.add(aPlayer);
+            
+            aPlayer = new Defence();
+            aPlayer.setName("Trevor Misfeldt");
+            aPlayer.setNumber(30);
+            players.add(aPlayer);
+
+            aPlayer = new Defence();
+            aPlayer.setName("Jim Shur");
+            aPlayer.setNumber(24);
             players.add(aPlayer);
             
             writeRoster(file);
@@ -90,45 +120,13 @@ public class Coach extends MyObserver {
                                " completed "+exercise.getDurationInMinutes()+
                                " minutes "+exercise.getCurrentExercise()+
                                " exercise.");
-            findPlayerPositionInTeam(player);
+            player.setIsExercising(false);
+            if (team.isTeamReady()) {
+                setupTheGame();
+            }
             
         } else {
             System.out.println("ERROR: Unexpected class");
-            System.exit(1);
-        }
-    }
-    
-    
-    private void findPlayerPositionInTeam(Player player) {
-        
-        // NOTE! Assuming here that the team is filled properly
-        // i.e. there are correct instance per each team position
-        
-        int position = -1;
-        
-        if (player instanceof Goalie) {
-            position = Team.GOALIE;
-        } else if (player instanceof Center) {
-            position = Team.CENTER;
-        } else if (player instanceof Leftwing) {
-            position = Team.LEFTWING;
-        } else if (player instanceof Rightwing) {
-            position = Team.RIGHTWING;
-        } else if (player instanceof Defence) {
-            if (team.getPlayerInPosition(Team.LEFTDEFENCE) == null) {
-                position = Team.LEFTDEFENCE;
-            } else {
-                position = Team.RIGHTDEFENCE;
-            }
-        }
-        
-        if (position >= 0) {
-            team.addPlayerToPosition(player, position);
-            if (team.isTeamFull()) {
-                setupTheGame();
-            }
-        } else {
-            System.out.println("ERROR: Unexpected class!");
             System.exit(1);
         }
     }
@@ -139,10 +137,11 @@ public class Coach extends MyObserver {
         // anything more will cause trouble...
         int index = 0;
         int selected;
-        Exercise[] drills = new Exercise[6];
+        Exercise[] drills = new Exercise[players.size()];
         Scanner scan = new Scanner(System.in);
         
         for (Player player : players) {
+            System.out.println("TEAM: "+team.openPositions());
             System.out.println("PLAYER: "+player.getName()+
                                " #"+player.getNumber()+" "+player.getRole());
             System.out.println("0 - Not playing");
@@ -150,6 +149,7 @@ public class Coach extends MyObserver {
             System.out.println("2 - Agility   ("+player.getAgility()+")");
             System.out.println("3 - Endurance ("+player.getEndurance()+")");
             System.out.println("4 - Strength  ("+player.getStrength()+")");
+            System.out.println("5 - Relaxation");
             System.out.print("Select type of exercise: ");
 
             selected = scan.nextInt();
@@ -171,6 +171,9 @@ public class Coach extends MyObserver {
                 case 4:
                     drills[index] = new Strength();
                     break;
+                case 5:
+                    drills[index] = new Relaxation();
+                    break;
                 default:
                     System.out.println("ERROR: Unexpected selection!");
                     System.exit(1);
@@ -181,8 +184,10 @@ public class Coach extends MyObserver {
                 drills[index].selectExercise();
                 drills[index].setDurationInMinutes();
                 index++;
+                team.addPlayer(player);
             } else {
                 player.rest();
+                
             }
         }
         

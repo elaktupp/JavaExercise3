@@ -38,23 +38,25 @@ public abstract class Exercise extends Subject {
     }
     
     public void setDurationInMinutes() {
-        int duration = 0;
-        Scanner scan = new Scanner(System.in);
-        do {
-            try {
-                System.out.print("Set duration between 30 and 90 minutes: ");
-                duration = scan.nextInt();
-                scan.nextLine(); // Consume next line
-                if (duration > 29 && duration < 91) {
-                    // Acceptable value
-                    this.durationInMinutes = duration;
-                    break;
+        if (durationInMinutes == 0) {
+            int duration = 0;
+            Scanner scan = new Scanner(System.in);
+            do {
+                try {
+                    System.out.print("Set duration between 30 and 90 minutes: ");
+                    duration = scan.nextInt();
+                    scan.nextLine(); // Consume next line
+                    if (duration > 29 && duration < 91) {
+                        // Acceptable value
+                        this.durationInMinutes = duration;
+                        break;
+                    }
+                } catch (Exception e) {
+                    scan.nextLine(); // Consume next line
                 }
-            } catch (Exception e) {
-                scan.nextLine(); // Consume next line
-            }
-            System.out.println("Try selecting number between 30 and 90.");
-        } while(true);
+                System.out.println("Try selecting number between 30 and 90.");
+            } while(true);
+        }
     }
     
     public void setDurationInMinutes(int duration) {

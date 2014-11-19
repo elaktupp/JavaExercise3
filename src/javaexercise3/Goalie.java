@@ -23,8 +23,10 @@ public class Goalie extends Player {
         System.out.println("#"+getNumber()+" "+getName()+"'s statistics: "+
                            getAccuracy()+"/"+getAgility()+"/"+
                            getEndurance()+"/"+getStrength());
-        System.out.println("Saves: "+getStatGoalsSaved()+", Lets: "+getStatGoalsLet());
-        System.out.println("Made:  "+getStatGoalsMade()+", Own: "+getStatGoalsOwn());
+        System.out.println("Saves: "+getStatGoalsSaved()+
+                           ", Lets: "+getStatGoalsLet()+
+                           ", Made:  "+getStatGoalsMade()+
+                           ", Own: "+getStatGoalsOwn());
     }
 
     /**
